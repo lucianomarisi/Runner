@@ -55,27 +55,34 @@ class DeviceMotionWrapper {
   func startDeviceMotionUpdates(handler: (Motionable, NSError?) -> Void) {
     
     if !motionManager.deviceMotionAvailable {
-      
-      var mockPoints = [Point]()
-      
-      for index in 0...100 {
-        let value = Double(index)
-        let gravity = CMAcceleration(x: value, y: value, z: value)
-        let mockPoint = Point(timestamp: NSTimeInterval(index) / 10, gravity: gravity)
-        mockPoints.append(mockPoint)
-      }
-      
-      dispatcher.startWithClosure(mockPoints) { (mockPoint) -> Void in
-        handler(mockPoint, nil)
-      }
+      startMockedDeviceMotionUpdates(handler)
     } else {
-      motionManager.startDeviceMotionUpdatesToQueue(queue) {(deviceMotion, error) -> Void in
-        
-        guard let deviceMotion = deviceMotion else {
-          return
-        }
-        handler(deviceMotion, error)
+      startRealDeviceMotionUpdates(handler)
+    }
+  }
+  
+  private func startMockedDeviceMotionUpdates(handler: (Motionable, NSError?) -> Void) {
+    var mockPoints = [Point]()
+    
+    for index in 0...100 {
+      let value = Double(index)
+      let gravity = CMAcceleration(x: value, y: value, z: value)
+      let mockPoint = Point(timestamp: NSTimeInterval(index) / 10, gravity: gravity)
+      mockPoints.append(mockPoint)
+    }
+    
+    dispatcher.startWithClosure(mockPoints) { (mockPoint) -> Void in
+      handler(mockPoint, nil)
+    }
+  }
+  
+  private func startRealDeviceMotionUpdates(handler: (Motionable, NSError?) -> Void) {
+    motionManager.startDeviceMotionUpdatesToQueue(queue) {(deviceMotion, error) -> Void in
+      
+      guard let deviceMotion = deviceMotion else {
+        return
       }
+      handler(deviceMotion, error)
     }
   }
   
