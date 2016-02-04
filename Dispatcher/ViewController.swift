@@ -9,6 +9,8 @@
 import UIKit
 import CoreMotion
 
+
+
 struct Point : Dispatchable, Motionable {
   let timestamp : NSTimeInterval
   let gravity : CMAcceleration
@@ -28,13 +30,23 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    deviceMotionWrapper.startDeviceMotionUpdates { (sensorable, error) -> Void in
-      NSLog("\(sensorable)")
+//    deviceMotionWrapper.startDeviceMotionUpdates { (sensorable, error) -> Void in
+//      NSLog("\(sensorable)")
+//    }
+    
+    deviceMotionWrapper.startDeviceMotionUpdates(deviceMotionWrapper.startMockedDeviceMotionUpdates) { (motionable, error) -> Void in
+      NSLog("\(motionable)")
     }
+    
+//    deviceMotionWrapper.startDeviceMotionUpdates { (motionable, error) -> Void in
+//      NSLog("\(motionable)")
+//    }
+
   }
   
 }
 
+typealias DeviceMotionHandler = (Motionable, NSError?) -> Void
 
 class DeviceMotionWrapper {
   
@@ -52,16 +64,11 @@ class DeviceMotionWrapper {
   
   private let dispatcher = Dispatcher()
   
-  func startDeviceMotionUpdates(handler: (Motionable, NSError?) -> Void) {
-    
-    if !motionManager.deviceMotionAvailable {
-      startMockedDeviceMotionUpdates(handler)
-    } else {
-      startRealDeviceMotionUpdates(handler)
-    }
+  func startDeviceMotionUpdates(deviceMotionFunction: (DeviceMotionHandler) -> Void, handler: DeviceMotionHandler) {
+    deviceMotionFunction(handler)
   }
   
-  private func startMockedDeviceMotionUpdates(handler: (Motionable, NSError?) -> Void) {
+  private func startMockedDeviceMotionUpdates(handler: DeviceMotionHandler) {
     var mockPoints = [Point]()
     
     for index in 0...100 {
@@ -70,13 +77,13 @@ class DeviceMotionWrapper {
       let mockPoint = Point(timestamp: NSTimeInterval(index) / 10, gravity: gravity)
       mockPoints.append(mockPoint)
     }
-    
+
     dispatcher.startWithClosure(mockPoints) { (mockPoint) -> Void in
       handler(mockPoint, nil)
     }
   }
   
-  private func startRealDeviceMotionUpdates(handler: (Motionable, NSError?) -> Void) {
+  private func startRealDeviceMotionUpdates(handler: DeviceMotionHandler) {
     motionManager.startDeviceMotionUpdatesToQueue(queue) {(deviceMotion, error) -> Void in
       
       guard let deviceMotion = deviceMotion else {
