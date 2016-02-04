@@ -30,23 +30,20 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    deviceMotionWrapper.startDeviceMotionUpdates { (sensorable, error) -> Void in
-//      NSLog("\(sensorable)")
-//    }
-    
-    deviceMotionWrapper.startDeviceMotionUpdates(deviceMotionWrapper.startMockedDeviceMotionUpdates) { (motionable, error) -> Void in
-      NSLog("\(motionable)")
-    }
-    
-//    deviceMotionWrapper.startDeviceMotionUpdates { (motionable, error) -> Void in
+//    deviceMotionWrapper.startDeviceMotionUpdates(deviceMotionWrapper.startMockedDeviceMotionUpdates) { (motionable, error) -> Void in
 //      NSLog("\(motionable)")
 //    }
+    
+    deviceMotionWrapper.startDeviceMotionUpdates { (motionable, error) -> Void in
+      NSLog("\(motionable)")
+    }
 
   }
   
 }
 
 typealias DeviceMotionHandler = (Motionable, NSError?) -> Void
+typealias DeviceMotionHandlerFunction = DeviceMotionHandler -> Void
 
 class DeviceMotionWrapper {
   
@@ -64,8 +61,13 @@ class DeviceMotionWrapper {
   
   private let dispatcher = Dispatcher()
   
-  func startDeviceMotionUpdates(deviceMotionFunction: (DeviceMotionHandler) -> Void, handler: DeviceMotionHandler) {
-    deviceMotionFunction(handler)
+  func startDeviceMotionUpdates(deviceMotionFunction: DeviceMotionHandlerFunction? = nil, handler: DeviceMotionHandler) {
+    
+    if deviceMotionFunction != nil {
+      deviceMotionFunction?(handler)
+    } else {
+      startRealDeviceMotionUpdates(handler)
+    }
   }
   
   private func startMockedDeviceMotionUpdates(handler: DeviceMotionHandler) {
