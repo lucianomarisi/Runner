@@ -53,7 +53,7 @@ class DeviceMotionWrapper {
   
   private func startMockedDeviceMotionUpdates<T where T : Dispatchable, T : Motionable>(mockPoints: [T], handler: DeviceMotionHandler) {
     
-    dispatcher.startWithClosure(mockPoints) { (mockPoint) -> Void in
+    dispatcher.startWithMockPoints(mockPoints) { (mockPoint) -> Void in
       handler(mockPoint, nil)
     }
   }

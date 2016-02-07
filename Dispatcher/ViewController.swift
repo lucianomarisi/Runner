@@ -9,10 +9,10 @@
 import UIKit
 import CoreMotion
 
-struct Point : Dispatchable, Motionable {
-  let timestamp : NSTimeInterval
-  let gravity : CMAcceleration
+enum DispatchableFunction {
+  case Sine // A.sin(f.t)+offset
 }
+
 
 class ViewController: UIViewController {
   
@@ -23,12 +23,32 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
 
-    var mockPoints = [Point]()
+    dispatcher.startWithFunction { (point) -> Void in
+      print("\(point.timestamp),\(point.value)")
+//      NSLog("\(point.value)")
+    }
+
+  }
+
+}
+
+
+
+
+extension ViewController {
+  
+  struct MotionablePoint : Dispatchable, Motionable {
+    let timestamp : NSTimeInterval
+    let gravity : CMAcceleration
+  }
+  
+  func mockAccelerometer() {
+    var mockPoints = [MotionablePoint]()
     
     for index in 0...100 {
       let value = Double(index)
       let gravity = CMAcceleration(x: value, y: value, z: value)
-      let mockPoint = Point(timestamp: NSTimeInterval(index) / 10, gravity: gravity)
+      let mockPoint = MotionablePoint(timestamp: NSTimeInterval(index) / 10, gravity: gravity)
       mockPoints.append(mockPoint)
     }
     
@@ -36,10 +56,9 @@ class ViewController: UIViewController {
       NSLog("\(motionable.gravity)")
     }
     
-//    deviceMotionWrapper.startDeviceMotionUpdates { (motionable, error) -> Void in
-//      NSLog("\(motionable.gravity)")
-//    }
-
+    //    deviceMotionWrapper.startDeviceMotionUpdates { (motionable, error) -> Void in
+    //      NSLog("\(motionable.gravity)")
+    //    }
   }
   
 }
