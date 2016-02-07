@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
 
-    dispatcher.startWithFunction { (point) -> Void in
+    dispatcher.startWithFunction(sineSignal) { (point) -> Void in
       print("\(point.timestamp),\(point.value)")
 //      NSLog("\(point.value)")
     }
@@ -32,6 +32,13 @@ class ViewController: UIViewController {
 
 }
 
+private func sineSignal(nextTimestamp: NSTimeInterval) -> Point {
+  let signalFrequency = 1.0
+  let amplitude = 2.0
+  let offset = 0.5
+  let value = amplitude * sin(nextTimestamp * signalFrequency) + offset
+  return Point(timestamp: nextTimestamp, value: value)
+}
 
 
 

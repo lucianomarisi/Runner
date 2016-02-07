@@ -25,6 +25,7 @@ class Dispatcher {
   private let dispatchQueue = dispatch_queue_create("Dispatcher_serial_queue", DISPATCH_QUEUE_SERIAL)
   
   private var startDate = NSDate()
+  private let samplingFrequency = 0.1
   
   /// This closure will be called the TimeScheduler finishes firing data
   var scheduleCompleteClosure : TimeSchedulerCompleteClosure?
@@ -40,10 +41,10 @@ class Dispatcher {
     firePointAtIndex(0, mockPoints: mockPoints, pointProcessClosure: pointProcessClosure)
   }
   
-  func startWithFunction(pointProcessClosure: (Point) -> Void) {
+  func startWithFunction(signalFunction: (NSTimeInterval -> Point), pointProcessClosure: (Point) -> Void) {
     startDate = NSDate()
     let nextPoint = Point(timestamp: startDate.timeIntervalSinceNow, value: 0)
-    self.firePoint(nextPoint, pointProcessClosure: pointProcessClosure)
+    self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
   }
   
   private func firePointAtIndex<T : Dispatchable>(currentIndex: Int, mockPoints: [T], pointProcessClosure: (T) -> Void) {
@@ -64,24 +65,15 @@ class Dispatcher {
   
   // MARK: Dispatching using function
   
-  private func firePoint(pointToFire: Point, pointProcessClosure: (Point) -> Void) {
+  private func firePoint(pointToFire: Point, signalFunction: (NSTimeInterval -> Point), pointProcessClosure: (Point) -> Void) {
     let timeSinceStart = -startDate.timeIntervalSinceNow
     let delayInSeconds = pointToFire.timestamp - timeSinceStart
     let dispatchTimeDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
     dispatch_after(dispatchTimeDelay, dispatchQueue) {
       pointProcessClosure(pointToFire)
-      let nextPoint = self.calculateNextPoint(pointToFire.timestamp)
-      self.firePoint(nextPoint, pointProcessClosure: pointProcessClosure)
+      let nextPoint = signalFunction(pointToFire.timestamp + self.samplingFrequency)
+      self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
     }
-  }
-  
-  private let samplingFrequency = 0.1
-  private func calculateNextPoint(currentTimestamp: NSTimeInterval) -> Point {
-    let signalFrequency = 1.0
-    let amplitude = 2.0
-    let offset = 0.5
-    let value = amplitude * sin(currentTimestamp * signalFrequency) + offset
-    return Point(timestamp: currentTimestamp + samplingFrequency, value: value)
   }
   
 }
