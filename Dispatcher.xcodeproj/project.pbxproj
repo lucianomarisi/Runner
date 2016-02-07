@@ -15,6 +15,7 @@
 		4F0C53AC1C63F28E00546280 /* DispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C53AB1C63F28E00546280 /* DispatcherTests.swift */; };
 		4F0C53B71C63F28E00546280 /* DispatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C53B61C63F28E00546280 /* DispatcherUITests.swift */; };
 		4F0C53C51C63F2FB00546280 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C53C41C63F2FB00546280 /* Dispatcher.swift */; };
+		4FAAADA31C68010600B7A5FD /* DeviceMotionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAAADA21C68010600B7A5FD /* DeviceMotionWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		4F0C53B61C63F28E00546280 /* DispatcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherUITests.swift; sourceTree = "<group>"; };
 		4F0C53B81C63F28E00546280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F0C53C41C63F2FB00546280 /* Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
+		4FAAADA21C68010600B7A5FD /* DeviceMotionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMotionWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				4F0C53961C63F28E00546280 /* AppDelegate.swift */,
 				4F0C53981C63F28E00546280 /* ViewController.swift */,
 				4F0C53C41C63F2FB00546280 /* Dispatcher.swift */,
+				4FAAADA21C68010600B7A5FD /* DeviceMotionWrapper.swift */,
 				4F0C539A1C63F28E00546280 /* Main.storyboard */,
 				4F0C539D1C63F28E00546280 /* Assets.xcassets */,
 				4F0C539F1C63F28E00546280 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 				4F0C53991C63F28E00546280 /* ViewController.swift in Sources */,
 				4F0C53971C63F28E00546280 /* AppDelegate.swift in Sources */,
 				4F0C53C51C63F2FB00546280 /* Dispatcher.swift in Sources */,
+				4FAAADA31C68010600B7A5FD /* DeviceMotionWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +492,7 @@
 				4F0C53BD1C63F28E00546280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F0C53BE1C63F28E00546280 /* Build configuration list for PBXNativeTarget "DispatcherTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +501,7 @@
 				4F0C53C01C63F28E00546280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F0C53C11C63F28E00546280 /* Build configuration list for PBXNativeTarget "DispatcherUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +510,7 @@
 				4F0C53C31C63F28E00546280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
