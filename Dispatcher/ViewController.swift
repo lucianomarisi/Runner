@@ -9,11 +9,6 @@
 import UIKit
 import CoreMotion
 
-enum DispatchableFunction {
-  case Sine // A.sin(f.t)+offset
-}
-
-
 class ViewController: UIViewController {
   
   let dispatcher = Dispatcher()
@@ -42,7 +37,8 @@ class ViewController: UIViewController {
 
 }
 
-private func sineSignal(nextTimestamp: NSTimeInterval) -> Point {
+// A.sin(f.t)+offset
+func sineSignal(nextTimestamp: NSTimeInterval) -> Point {
   let signalFrequency = 1.0
   let amplitude = 2.0
   let offset = 0.5
