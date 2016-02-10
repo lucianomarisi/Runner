@@ -30,7 +30,7 @@ public struct Point : Dispatchable {
 private let defaultSamplingFrequency = 0.1
 
 /// Object used to dispatch points at specific times
-public class Dispatcher {
+public final class Dispatcher {
   
   private let dispatchQueue = dispatch_queue_create("Dispatcher_serial_queue", DISPATCH_QUEUE_SERIAL)
   private var startDate = NSDate()
