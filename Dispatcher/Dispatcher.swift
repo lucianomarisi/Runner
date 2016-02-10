@@ -8,27 +8,36 @@
 
 import Foundation
 
-typealias TimeSchedulerClosure = (Dispatchable) -> Void
-typealias TimeSchedulerCompleteClosure = Void -> Void
-
-protocol Dispatchable {
+/**
+ *  Protocol useful to dispatch any struct/class at a specific timestamp
+ */
+public protocol Dispatchable {
   var timestamp : NSTimeInterval { get }
 }
 
-struct Point : Dispatchable {
-  let timestamp : NSTimeInterval
-  let value : Double
+/**
+ *  Struct used to represent a point in time that has been dispatch by a function
+ */
+public struct Point : Dispatchable {
+
+  /// The timestamp of the point
+  public let timestamp : NSTimeInterval
+  
+  /// The numerical value of the point
+  public let value : Double
 }
 
-class Dispatcher {
+private let defaultSamplingFrequency = 0.1
+
+/// Object used to dispatch points at specific times
+public class Dispatcher {
   
   private let dispatchQueue = dispatch_queue_create("Dispatcher_serial_queue", DISPATCH_QUEUE_SERIAL)
-  
   private var startDate = NSDate()
-  private let samplingFrequency = 0.1
+  private var timeInterval : Double = defaultSamplingFrequency
   
   /// This closure will be called the TimeScheduler finishes firing data
-  var scheduleCompleteClosure : TimeSchedulerCompleteClosure?
+  var scheduleCompleteClosure : (Void -> Void)?
   
   /**
    Start firing the points in a array
@@ -36,16 +45,26 @@ class Dispatcher {
    - parameter mockPoints:          The array of points to iterate
    - parameter pointProcessClosure: The closure to be executed when at point if fired, contains the point itself
    */
-  func startWithMockPoints<T: Dispatchable>(mockPoints: [T], pointProcessClosure: (T) -> Void) {
+  public func startWithMockPoints<T: Dispatchable>(mockPoints: [T], pointProcessClosure: (T) -> Void) {
     startDate = NSDate()
     firePointAtIndex(0, mockPoints: mockPoints, pointProcessClosure: pointProcessClosure)
   }
   
-  func startWithFunction(signalFunction: (NSTimeInterval -> Point), pointProcessClosure: (Point) -> Void) {
+  /**
+   Start dispatching point using a function
+   
+   - parameter timeInterval:        The time interval the points will be dispatched
+   - parameter signalFunction:      The function to generate the points
+   - parameter pointProcessClosure: The closure executed after each point
+   */
+  public func startWithFunction(signalFunction: (NSTimeInterval -> Point), timeInterval: Double = defaultSamplingFrequency, pointProcessClosure: (Point) -> Void) {
     startDate = NSDate()
+    self.timeInterval = timeInterval
     let nextPoint = Point(timestamp: startDate.timeIntervalSinceNow, value: 0)
     self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
   }
+  
+  // MARK: Dispatching using provided array of Dispatchable items
   
   private func firePointAtIndex<T : Dispatchable>(currentIndex: Int, mockPoints: [T], pointProcessClosure: (T) -> Void) {
     if currentIndex >= mockPoints.count {
@@ -71,7 +90,7 @@ class Dispatcher {
     let dispatchTimeDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
     dispatch_after(dispatchTimeDelay, dispatchQueue) {
       pointProcessClosure(pointToFire)
-      let nextPoint = signalFunction(pointToFire.timestamp + self.samplingFrequency)
+      let nextPoint = signalFunction(pointToFire.timestamp + self.timeInterval)
       self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
     }
   }

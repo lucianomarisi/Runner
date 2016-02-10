@@ -23,9 +23,19 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
 
-    dispatcher.startWithFunction(sineSignal) { (point) -> Void in
-      print("\(point.timestamp),\(point.value)")
+//    dispatcher.startWithFunction(sineSignal) { (point) -> Void in
 //      NSLog("\(point.value)")
+//    }
+    
+    var mockPoints = [Point]()
+    
+    for index in 0...10 {
+      let mockPoint = Point(timestamp: NSTimeInterval(index) / 10, value: Double(index))
+      mockPoints.append(mockPoint)
+    }
+    
+    dispatcher.startWithMockPoints(mockPoints) { (point) -> Void in
+      NSLog("\(point.value)")
     }
 
   }
@@ -36,7 +46,8 @@ private func sineSignal(nextTimestamp: NSTimeInterval) -> Point {
   let signalFrequency = 1.0
   let amplitude = 2.0
   let offset = 0.5
-  let value = amplitude * sin(nextTimestamp * signalFrequency) + offset
+  let phaseShift = 0.2
+  let value = amplitude * sin(nextTimestamp * signalFrequency + phaseShift) + offset
   return Point(timestamp: nextTimestamp, value: value)
 }
 
