@@ -35,6 +35,7 @@ public final class Dispatcher {
   private let dispatchQueue = dispatch_queue_create("Dispatcher_serial_queue", DISPATCH_QUEUE_SERIAL)
   private var startDate = NSDate()
   private var timeInterval : Double = defaultSamplingFrequency
+  private var shouldDispatchPoints = true
   
   /// This closure will be called the TimeScheduler finishes firing data
   var scheduleCompleteClosure : (Void -> Void)?
@@ -64,17 +65,20 @@ public final class Dispatcher {
     self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
   }
   
+  public func stop() {
+    shouldDispatchPoints = false
+  }
+  
   // MARK: Dispatching using provided array of Dispatchable items
   
   private func firePointAtIndex<T : Dispatchable>(currentIndex: Int, mockPoints: [T], pointProcessClosure: (T) -> Void) {
-    if currentIndex >= mockPoints.count {
+    if currentIndex >= mockPoints.count || !shouldDispatchPoints {
       scheduleCompleteClosure?()
+      shouldDispatchPoints = true
       return
     }
     let currentPoint = mockPoints[currentIndex]
-    let timeSinceStart = -startDate.timeIntervalSinceNow
-    let delayInSeconds = currentPoint.timestamp - timeSinceStart
-    let dispatchTimeDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+    let dispatchTimeDelay = dispatchTimeDelayWithTimestamp(currentPoint.timestamp)
     dispatch_after(dispatchTimeDelay, dispatchQueue) {
       pointProcessClosure(mockPoints[currentIndex])
       let nextIndex = currentIndex + 1
@@ -85,14 +89,24 @@ public final class Dispatcher {
   // MARK: Dispatching using function
   
   private func firePoint(pointToFire: Point, signalFunction: (NSTimeInterval -> Point), pointProcessClosure: (Point) -> Void) {
-    let timeSinceStart = -startDate.timeIntervalSinceNow
-    let delayInSeconds = pointToFire.timestamp - timeSinceStart
-    let dispatchTimeDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+    if !shouldDispatchPoints {
+      shouldDispatchPoints = true
+      return
+    }
+    let dispatchTimeDelay = dispatchTimeDelayWithTimestamp(pointToFire.timestamp)
     dispatch_after(dispatchTimeDelay, dispatchQueue) {
       pointProcessClosure(pointToFire)
       let nextPoint = signalFunction(pointToFire.timestamp + self.timeInterval)
       self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
     }
+  }
+  
+  // MARk: Helpers
+  
+  private func dispatchTimeDelayWithTimestamp(timestamp: NSTimeInterval) -> dispatch_time_t {
+    let timeSinceStart = -startDate.timeIntervalSinceNow
+    let delayInSeconds = timestamp - timeSinceStart
+    return dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
   }
   
 }
