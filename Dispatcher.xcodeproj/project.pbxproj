@@ -13,20 +13,12 @@
 		4F0C539E1C63F28E00546280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C539D1C63F28E00546280 /* Assets.xcassets */; };
 		4F0C53A11C63F28E00546280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C539F1C63F28E00546280 /* LaunchScreen.storyboard */; };
 		4F0C53AC1C63F28E00546280 /* DispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C53AB1C63F28E00546280 /* DispatcherTests.swift */; };
-		4F0C53B71C63F28E00546280 /* DispatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C53B61C63F28E00546280 /* DispatcherUITests.swift */; };
 		4F0C53C51C63F2FB00546280 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C53C41C63F2FB00546280 /* Dispatcher.swift */; };
 		4FAAADA31C68010600B7A5FD /* DeviceMotionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAAADA21C68010600B7A5FD /* DeviceMotionWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		4F0C53A81C63F28E00546280 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4F0C538B1C63F28E00546280 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4F0C53921C63F28E00546280;
-			remoteInfo = Dispatcher;
-		};
-		4F0C53B31C63F28E00546280 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4F0C538B1C63F28E00546280 /* Project object */;
 			proxyType = 1;
@@ -46,9 +38,6 @@
 		4F0C53A71C63F28E00546280 /* DispatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DispatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0C53AB1C63F28E00546280 /* DispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherTests.swift; sourceTree = "<group>"; };
 		4F0C53AD1C63F28E00546280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F0C53B21C63F28E00546280 /* DispatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DispatcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F0C53B61C63F28E00546280 /* DispatcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherUITests.swift; sourceTree = "<group>"; };
-		4F0C53B81C63F28E00546280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F0C53C41C63F2FB00546280 /* Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		4FAAADA21C68010600B7A5FD /* DeviceMotionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMotionWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,13 +57,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4F0C53AF1C63F28E00546280 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,7 +65,6 @@
 			children = (
 				4F0C53951C63F28E00546280 /* Dispatcher */,
 				4F0C53AA1C63F28E00546280 /* DispatcherTests */,
-				4F0C53B51C63F28E00546280 /* DispatcherUITests */,
 				4F0C53941C63F28E00546280 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,7 +74,6 @@
 			children = (
 				4F0C53931C63F28E00546280 /* Dispatcher.app */,
 				4F0C53A71C63F28E00546280 /* DispatcherTests.xctest */,
-				4F0C53B21C63F28E00546280 /* DispatcherUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,15 +100,6 @@
 				4F0C53AD1C63F28E00546280 /* Info.plist */,
 			);
 			path = DispatcherTests;
-			sourceTree = "<group>";
-		};
-		4F0C53B51C63F28E00546280 /* DispatcherUITests */ = {
-			isa = PBXGroup;
-			children = (
-				4F0C53B61C63F28E00546280 /* DispatcherUITests.swift */,
-				4F0C53B81C63F28E00546280 /* Info.plist */,
-			);
-			path = DispatcherUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,24 +140,6 @@
 			productReference = 4F0C53A71C63F28E00546280 /* DispatcherTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4F0C53B11C63F28E00546280 /* DispatcherUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4F0C53C11C63F28E00546280 /* Build configuration list for PBXNativeTarget "DispatcherUITests" */;
-			buildPhases = (
-				4F0C53AE1C63F28E00546280 /* Sources */,
-				4F0C53AF1C63F28E00546280 /* Frameworks */,
-				4F0C53B01C63F28E00546280 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4F0C53B41C63F28E00546280 /* PBXTargetDependency */,
-			);
-			name = DispatcherUITests;
-			productName = DispatcherUITests;
-			productReference = 4F0C53B21C63F28E00546280 /* DispatcherUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,10 +154,6 @@
 						CreatedOnToolsVersion = 7.2;
 					};
 					4F0C53A61C63F28E00546280 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 4F0C53921C63F28E00546280;
-					};
-					4F0C53B11C63F28E00546280 = {
 						CreatedOnToolsVersion = 7.2;
 						TestTargetID = 4F0C53921C63F28E00546280;
 					};
@@ -225,7 +174,6 @@
 			targets = (
 				4F0C53921C63F28E00546280 /* Dispatcher */,
 				4F0C53A61C63F28E00546280 /* DispatcherTests */,
-				4F0C53B11C63F28E00546280 /* DispatcherUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -242,13 +190,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4F0C53A51C63F28E00546280 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4F0C53B01C63F28E00546280 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,14 +218,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4F0C53AE1C63F28E00546280 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F0C53B71C63F28E00546280 /* DispatcherUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -292,11 +225,6 @@
 			isa = PBXTargetDependency;
 			target = 4F0C53921C63F28E00546280 /* Dispatcher */;
 			targetProxy = 4F0C53A81C63F28E00546280 /* PBXContainerItemProxy */;
-		};
-		4F0C53B41C63F28E00546280 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4F0C53921C63F28E00546280 /* Dispatcher */;
-			targetProxy = 4F0C53B31C63F28E00546280 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,30 +377,6 @@
 			};
 			name = Release;
 		};
-		4F0C53C21C63F28E00546280 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DispatcherUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.techbrewers.DispatcherUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Dispatcher;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		4F0C53C31C63F28E00546280 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DispatcherUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.techbrewers.DispatcherUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Dispatcher;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -499,15 +403,6 @@
 			buildConfigurations = (
 				4F0C53BF1C63F28E00546280 /* Debug */,
 				4F0C53C01C63F28E00546280 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4F0C53C11C63F28E00546280 /* Build configuration list for PBXNativeTarget "DispatcherUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4F0C53C21C63F28E00546280 /* Debug */,
-				4F0C53C31C63F28E00546280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
