@@ -61,8 +61,9 @@ public final class Dispatcher {
   public func startWithFunction(signalFunction: (NSTimeInterval -> Point), timeInterval: Double = defaultSamplingFrequency, pointProcessClosure: (Point) -> Void) {
     setupStartState()
     self.timeInterval = timeInterval
-    let nextPoint = Point(timestamp: startDate.timeIntervalSinceNow, value: 0)
-    self.firePoint(nextPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
+    let timestamp = startDate.timeIntervalSinceNow
+    let firstPoint = signalFunction(timestamp)
+    self.firePoint(firstPoint, signalFunction: signalFunction, pointProcessClosure: pointProcessClosure)
   }
   
   /**
