@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 
 }
 
-// A.sin(f.t)+offset
+// A.sin(f.t+phaseShift)+offset
 func sineSignal(nextTimestamp: NSTimeInterval) -> Point {
   let signalFrequency = 1.0
   let amplitude = 2.0
