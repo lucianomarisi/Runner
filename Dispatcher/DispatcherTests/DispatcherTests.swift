@@ -10,27 +10,36 @@ import XCTest
 @testable import Dispatcher
 
 class DispatcherTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+  let acceptableTolerance = 0.2 // seconds, test suite appears to run slower than app
+  
+  func testMockPoints() {
+    let expectation = expectationWithDescription("MockPoints")
+    let dispatcher = Dispatcher()
+    var mockPoints = [Point]()
+
+    let numberOfPoints = 10
+    let totalTime = 1.0
+    for index in 0...numberOfPoints {
+      let timestamp = NSTimeInterval(index) * totalTime / Double(numberOfPoints)
+      let mockPoint = Point(timestamp: timestamp, value: Double(index))
+      mockPoints.append(mockPoint)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    let startDate = NSDate()
+    dispatcher.startWithMockPoints(mockPoints) { (point) -> Void in
+      let currentDate = NSDate()
+      let difference = currentDate.timeIntervalSinceDate(startDate)
+      let deviation = difference - point.timestamp
+      XCTAssert(abs(deviation) < self.acceptableTolerance)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    dispatcher.scheduleCompleteClosure = {
+      expectation.fulfill()
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+    waitForExpectationsWithTimeout(totalTime + 1) { error in XCTAssert(error == nil) }
+  
+  }
+  
 }
