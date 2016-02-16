@@ -31,6 +31,10 @@ runner.startWithMockPoints(mockPoints) { (point) -> Void in
 }
 ```
 
+This will produce the following logs:
+
+![](Screenshots/mock_points_logs.png)
+
 ### Execute points using a function
 
 ```swift
@@ -54,3 +58,7 @@ runner.startWithFunction(sineSignal) { (point) -> Void in
 // Stop executing points
 runner.stop()
 ```
+
+This will produce the following logs:
+
+![](Screenshots/sine_wave_logs.png)
