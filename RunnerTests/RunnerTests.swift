@@ -32,6 +32,7 @@ class RunnerTests: XCTestCase {
       let difference = currentDate.timeIntervalSinceDate(startDate)
       let deviation = difference - point.timestamp
       XCTAssert(abs(deviation) < self.acceptableTolerance)
+      NSLog("testMockPointsRunning \(point.value)")
     }
     
     runner.scheduleCompleteClosure = {
@@ -48,13 +49,13 @@ class RunnerTests: XCTestCase {
     let startDate = NSDate()
     let totalTime = 1.0
     runner.startWithFunction(sineSignal) { (point) -> Void in
-      NSLog("\(point.value)")
       let expectedValue = self.sineSignal(point.timestamp).value
       XCTAssertEqual(expectedValue, point.value)
       let currentDate = NSDate()
       let difference = currentDate.timeIntervalSinceDate(startDate)
       let deviation = difference - point.timestamp
       XCTAssert(abs(deviation) < self.acceptableTolerance)
+      NSLog("testFunctionRunning \(point.value)")
     }
     
     runner.scheduleCompleteClosure = {
