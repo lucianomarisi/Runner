@@ -1,25 +1,25 @@
 //
-//  Dispatcher.swift
-//  Dispatcher
+//  Runner.swift
+//  Runner
 //
-//  Created by Luciano Marisi on 04/02/2016.
-//  Copyright © 2016 Techbrewers LTD. All rights reserved.
+//  Created by Luciano Marisi on 16/02/2016.
+//  Copyright © 2016 Luciano Marisi. All rights reserved.
 //
 
 import Foundation
 
 /**
- *  Protocol useful to dispatch any struct/class at a specific timestamp
+ *  Protocol useful to execute any struct/class at a specific timestamp
  */
-public protocol Dispatchable {
+public protocol Runnable {
   var timestamp : NSTimeInterval { get }
 }
 
 /**
- *  Struct used to represent a point in time that has been dispatch by a function
+ *  Struct used to represent a point in time that has been executed by a function
  */
-public struct Point : Dispatchable {
-
+public struct Point : Runnable {
+  
   /// The timestamp of the point
   public let timestamp : NSTimeInterval
   
@@ -29,13 +29,13 @@ public struct Point : Dispatchable {
 
 private let defaultSamplingFrequency = 0.1
 
-/// Object used to dispatch points at specific times
-public final class Dispatcher {
+/// Object used to run points at specific times
+public final class Runner {
   
-  private let dispatchQueue = dispatch_queue_create("Dispatcher_serial_queue", DISPATCH_QUEUE_SERIAL)
+  private let dispatchQueue = dispatch_queue_create("Runner_serial_queue", DISPATCH_QUEUE_SERIAL)
   private var startDate = NSDate()
   private var timeInterval : Double = defaultSamplingFrequency
-  private var shouldDispatchPoints = true
+  private var shouldExecutePoints = true
   
   /// This closure will be called the TimeScheduler finishes firing data
   public var scheduleCompleteClosure : (Void -> Void)?
@@ -46,15 +46,15 @@ public final class Dispatcher {
    - parameter mockPoints:          The array of points to iterate
    - parameter pointProcessClosure: The closure to be executed when at point if fired, contains the point itself
    */
-  public func startWithMockPoints<T: Dispatchable>(mockPoints: [T], pointProcessClosure: (T) -> Void) {
+  public func startWithMockPoints<T: Runnable>(mockPoints: [T], pointProcessClosure: (T) -> Void) {
     setupStartState()
     firePointAtIndex(0, mockPoints: mockPoints, pointProcessClosure: pointProcessClosure)
   }
   
   /**
-   Start dispatching point using a function
+   Start running points using a function
    
-   - parameter timeInterval:        The time interval the points will be dispatched
+   - parameter timeInterval:        The time interval the points will be executed
    - parameter signalFunction:      The function to generate the points
    - parameter pointProcessClosure: The closure executed after each point
    */
@@ -67,17 +67,17 @@ public final class Dispatcher {
   }
   
   /**
-   Stops dispatching points
+   Stops executing points
    */
   public func stop() {
-    shouldDispatchPoints = false
+    shouldExecutePoints = false
   }
   
-  // MARK: Dispatching using provided array of Dispatchable items
+  // MARK: Run using provided array of Runnable items
   
-  private func firePointAtIndex<T : Dispatchable>(currentIndex: Int, mockPoints: [T], pointProcessClosure: (T) -> Void) {
-    if currentIndex >= mockPoints.count || !shouldDispatchPoints {
-      dispatchingStopped()
+  private func firePointAtIndex<T : Runnable>(currentIndex: Int, mockPoints: [T], pointProcessClosure: (T) -> Void) {
+    if currentIndex >= mockPoints.count || !shouldExecutePoints {
+      runningStopped()
       return
     }
     let currentPoint = mockPoints[currentIndex]
@@ -89,11 +89,11 @@ public final class Dispatcher {
     }
   }
   
-  // MARK: Dispatching using function
+  // MARK: Run using function
   
   private func firePoint(pointToFire: Point, signalFunction: (NSTimeInterval -> Point), pointProcessClosure: (Point) -> Void) {
-    if !shouldDispatchPoints {
-      dispatchingStopped()
+    if !shouldExecutePoints {
+      runningStopped()
       return
     }
     let dispatchTimeDelay = dispatchTimeDelayWithTimestamp(pointToFire.timestamp)
@@ -114,12 +114,12 @@ public final class Dispatcher {
   
   private func setupStartState() {
     startDate = NSDate()
-    shouldDispatchPoints = true
+    shouldExecutePoints = true
   }
   
-  private func dispatchingStopped() {
+  private func runningStopped() {
     scheduleCompleteClosure?()
-    shouldDispatchPoints = true
+    shouldExecutePoints = true
   }
   
 }

@@ -1,17 +1,17 @@
-# Dispatcher
+# Runner
 
-[![Build Status](https://travis-ci.org/lucianomarisi/Dispatcher.svg?branch=master)](https://travis-ci.org/lucianomarisi/Dispatcher)
-[![codecov.io](http://codecov.io/github/lucianomarisi/Dispatcher/coverage.svg?branch=master)](http://codecov.io/github/lucianomarisi/Dispatcher?branch=master)
+[![Build Status](https://travis-ci.org/lucianomarisi/Runner.svg?branch=master)](https://travis-ci.org/lucianomarisi/Runner)
+[![codecov.io](http://codecov.io/github/lucianomarisi/Runner/coverage.svg?branch=master)](http://codecov.io/github/lucianomarisi/Runner?branch=master)
 
-Easily Dispatch points at specific time intervals.
+Easily execute a block at specific time intervals.
 
 ## Installation
 
-- Add the files inside the `Dispatcher` folder to your project
+- Add the files inside the `Runner` folder to your project
 
 ## Examples
 
-### Dispatch a predefined set of points
+### Execute a predefined set of points
 
 ```swift
 // Generate some points
@@ -25,13 +25,13 @@ for index in 0...numberOfPoints {
 }
 
 // Execute blocks at the times from the mocked points
-let dispatcher = Dispatcher()
-dispatcher.startWithMockPoints(mockPoints) { (point) -> Void in
+let runner = Runner()
+runner.startWithMockPoints(mockPoints) { (point) -> Void in
   NSLog("\(point.value)")
 }
 ```
 
-### Dispatch a points using a function
+### Execute points using a function
 
 ```swift
 
@@ -45,12 +45,12 @@ func sineSignal(nextTimestamp: NSTimeInterval) -> Point {
   return Point(timestamp: nextTimestamp, value: value)
 }
 
-let dispatcher = Dispatcher()
-// Start dispatching points
-dispatcher.startWithFunction(sineSignal) { (point) -> Void in
+let runner = Runner()
+// Start executing points
+runner.startWithFunction(sineSignal) { (point) -> Void in
   NSLog("\(point.value)")
 }
 
-// Stop dispatching points
-dispatcher.stop()
+// Stop executing points
+runner.stop()
 ```
