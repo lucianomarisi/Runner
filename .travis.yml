@@ -1,6 +1,6 @@
 language: objective-c
 osx_image: xcode7.2
 script:
-  - xcodebuild -scheme Runner -configuration Debug -sdk iphonesimulator9.2 -destination "OS=9.2,name=iPad 2" test -enableCodeCoverage YES
+  - xcodebuild -scheme Runner -configuration Debug -sdk iphonesimulator9.2 -destination "OS=9.2,name=iPad 2" test -enableCodeCoverage YES | xcpretty
 after_success:
   - bash <(curl -s https://codecov.io/bash)
