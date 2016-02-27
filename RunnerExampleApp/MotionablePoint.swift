@@ -20,17 +20,4 @@ struct MotionablePoint : Runnable, Motionable {
   /// The acceleration of this point
   let userAcceleration : CMAcceleration
   
-  /**
-   Designated initializer for a point
-   
-   - parameter timestamp: The timestamp of the point
-   - parameter value:     The numerical value of the point
-   
-   - returns: An initiliazed point
-   */
-  init(timestamp: NSTimeInterval, userAcceleration: CMAcceleration) {
-    self.timestamp = timestamp
-    self.userAcceleration = userAcceleration
-  }
-  
 }

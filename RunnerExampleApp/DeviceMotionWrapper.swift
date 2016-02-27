@@ -12,7 +12,6 @@ import Runner
 extension CMDeviceMotion : Motionable {}
 
 typealias DeviceMotionHandler = (Motionable, NSError?) -> Void
-typealias DeviceMotionHandlerFunction = DeviceMotionHandler -> Void
 
 private let defaultDeviceMotionUpdateInterval = 0.01
 
@@ -29,6 +28,17 @@ class DeviceMotionWrapper {
     queue.maxConcurrentOperationCount = 1
     return queue
   }()
+  
+  
+  func startDeviceMotionUpdates(handler: CMDeviceMotionHandler) {
+    motionManager.startDeviceMotionUpdatesToQueue(queue) {(deviceMotion, error) -> Void in
+      
+      guard let deviceMotion = deviceMotion else {
+        return
+      }
+      handler(deviceMotion, error)
+    }
+  }
   
   private let runner = Runner()
   

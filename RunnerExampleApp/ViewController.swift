@@ -17,10 +17,15 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-//    deviceMotionWrapper.startDeviceMotionUpdates(sineSignal, timeInterval: 0.1) { (point, error) -> Void in
-//      NSLog("\(point.userAcceleration)")
-//    }
+    // No accelerometer mocking
+    deviceMotionWrapper.startDeviceMotionUpdates { (deviceMotion, error) -> Void in
+      guard let deviceMotion = deviceMotion else {
+        return
+      }
+      NSLog("\(deviceMotion.userAcceleration)")
+    }
     
+    /* Mock points example
     var mockPoints = [MotionablePoint]()
     
     for index in 0...100 {
@@ -29,10 +34,18 @@ class ViewController: UIViewController {
       let mockPoint = MotionablePoint(timestamp: NSTimeInterval(index) / 10, userAcceleration: userAcceleration)
       mockPoints.append(mockPoint)
     }
-
+    
     deviceMotionWrapper.startDeviceMotionUpdates(mockPoints) { (point, error) -> Void in
       NSLog("\(point)")
     }
+    */
+    
+    /* Function example
+    deviceMotionWrapper.startDeviceMotionUpdates(sineSignal, timeInterval: 0.1) { (point, error) -> Void in
+      NSLog("\(point.userAcceleration)")
+    }
+    */
+
   }
   
 }
