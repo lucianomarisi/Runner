@@ -11,6 +11,13 @@
 		4F49C7551C73C982003E4895 /* Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F49C74A1C73C982003E4895 /* Runner.framework */; };
 		4F49C75A1C73C982003E4895 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F49C7591C73C982003E4895 /* RunnerTests.swift */; };
 		4F49C7651C73C9B7003E4895 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F49C7641C73C9B7003E4895 /* Runner.swift */; };
+		4FCF55AD1C822EA200783921 /* Motionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF55AC1C822EA200783921 /* Motionable.swift */; };
+		4FCF55AE1C8233C000783921 /* DeviceMotionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB3CD61C822949001A80BE /* DeviceMotionWrapper.swift */; };
+		4FCF55B01C8237FB00783921 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF55AF1C8237FB00783921 /* Point.swift */; };
+		4FCF55B21C82381400783921 /* Runnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF55B11C82381400783921 /* Runnable.swift */; };
+		4FCF55B41C8241E200783921 /* MotionablePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF55B31C8241E200783921 /* MotionablePoint.swift */; };
+		4FCF55B51C82480800783921 /* Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F49C74A1C73C982003E4895 /* Runner.framework */; };
+		4FCF55B61C82480800783921 /* Runner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F49C74A1C73C982003E4895 /* Runner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4FFB3CC71C822759001A80BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB3CC61C822759001A80BE /* AppDelegate.swift */; };
 		4FFB3CC91C822759001A80BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB3CC81C822759001A80BE /* ViewController.swift */; };
 		4FFB3CCC1C822759001A80BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB3CCA1C822759001A80BE /* Main.storyboard */; };
@@ -26,7 +33,28 @@
 			remoteGlobalIDString = 4F49C7491C73C982003E4895;
 			remoteInfo = Runner;
 		};
+		4FCF55B71C82480800783921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F49C7411C73C982003E4895 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F49C7491C73C982003E4895;
+			remoteInfo = Runner;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4FCF55B91C82480800783921 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4FCF55B61C82480800783921 /* Runner.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F49C74A1C73C982003E4895 /* Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +64,10 @@
 		4F49C7591C73C982003E4895 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		4F49C75B1C73C982003E4895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F49C7641C73C9B7003E4895 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		4FCF55AC1C822EA200783921 /* Motionable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Motionable.swift; sourceTree = "<group>"; };
+		4FCF55AF1C8237FB00783921 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		4FCF55B11C82381400783921 /* Runnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runnable.swift; sourceTree = "<group>"; };
+		4FCF55B31C8241E200783921 /* MotionablePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionablePoint.swift; sourceTree = "<group>"; };
 		4FFB3CC41C822759001A80BE /* RunnerExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunnerExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFB3CC61C822759001A80BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FFB3CC81C822759001A80BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +75,7 @@
 		4FFB3CCD1C822759001A80BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FFB3CD01C822759001A80BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FFB3CD21C822759001A80BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FFB3CD61C822949001A80BE /* DeviceMotionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMotionWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FCF55B51C82480800783921 /* Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,9 +128,11 @@
 		4F49C74C1C73C982003E4895 /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				4F49C74F1C73C982003E4895 /* Info.plist */,
+				4FCF55AF1C8237FB00783921 /* Point.swift */,
+				4FCF55B11C82381400783921 /* Runnable.swift */,
 				4F49C74D1C73C982003E4895 /* Runner.h */,
 				4F49C7641C73C9B7003E4895 /* Runner.swift */,
-				4F49C74F1C73C982003E4895 /* Info.plist */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -115,6 +151,9 @@
 			children = (
 				4FFB3CC61C822759001A80BE /* AppDelegate.swift */,
 				4FFB3CC81C822759001A80BE /* ViewController.swift */,
+				4FFB3CD61C822949001A80BE /* DeviceMotionWrapper.swift */,
+				4FCF55AC1C822EA200783921 /* Motionable.swift */,
+				4FCF55B31C8241E200783921 /* MotionablePoint.swift */,
 				4FFB3CCA1C822759001A80BE /* Main.storyboard */,
 				4FFB3CCD1C822759001A80BE /* Assets.xcassets */,
 				4FFB3CCF1C822759001A80BE /* LaunchScreen.storyboard */,
@@ -180,10 +219,12 @@
 				4FFB3CC01C822759001A80BE /* Sources */,
 				4FFB3CC11C822759001A80BE /* Frameworks */,
 				4FFB3CC21C822759001A80BE /* Resources */,
+				4FCF55B91C82480800783921 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4FCF55B81C82480800783921 /* PBXTargetDependency */,
 			);
 			name = RunnerExampleApp;
 			productName = RunnerExampleApp;
@@ -263,6 +304,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FCF55B01C8237FB00783921 /* Point.swift in Sources */,
+				4FCF55B21C82381400783921 /* Runnable.swift in Sources */,
 				4F49C7651C73C9B7003E4895 /* Runner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,8 +322,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FCF55B41C8241E200783921 /* MotionablePoint.swift in Sources */,
 				4FFB3CC91C822759001A80BE /* ViewController.swift in Sources */,
+				4FCF55AD1C822EA200783921 /* Motionable.swift in Sources */,
 				4FFB3CC71C822759001A80BE /* AppDelegate.swift in Sources */,
+				4FCF55AE1C8233C000783921 /* DeviceMotionWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +337,11 @@
 			isa = PBXTargetDependency;
 			target = 4F49C7491C73C982003E4895 /* Runner */;
 			targetProxy = 4F49C7561C73C982003E4895 /* PBXContainerItemProxy */;
+		};
+		4FCF55B81C82480800783921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F49C7491C73C982003E4895 /* Runner */;
+			targetProxy = 4FCF55B71C82480800783921 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -462,6 +513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RunnerExampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucianomarisi.RunnerExampleApp;
@@ -473,6 +525,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RunnerExampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucianomarisi.RunnerExampleApp;
@@ -517,6 +570,7 @@
 				4FFB3CD41C822759001A80BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

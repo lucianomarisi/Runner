@@ -8,25 +8,6 @@
 
 import Foundation
 
-/**
- *  Protocol useful to execute any struct/class at a specific timestamp
- */
-public protocol Runnable {
-  var timestamp : NSTimeInterval { get }
-}
-
-/**
- *  Struct used to represent a point in time that has been executed by a function
- */
-public struct Point : Runnable {
-  
-  /// The timestamp of the point
-  public let timestamp : NSTimeInterval
-  
-  /// The numerical value of the point
-  public let value : Double
-}
-
 private let defaultSamplingFrequency = 0.1
 
 /// Object used to run points at specific times
@@ -39,6 +20,11 @@ public final class Runner {
   
   /// This closure will be called the TimeScheduler finishes firing data
   public var scheduleCompleteClosure : (Void -> Void)?
+  
+  /**
+   Designated initializer
+   */
+  public init() {}
   
   /**
    Start firing the points in a array
@@ -58,7 +44,7 @@ public final class Runner {
    - parameter signalFunction:      The function to generate the points
    - parameter pointProcessClosure: The closure executed after each point
    */
-  public func startWithFunction(signalFunction: (NSTimeInterval -> Point), timeInterval: Double = defaultSamplingFrequency, pointProcessClosure: (Point) -> Void) {
+  public func startWithFunction<T: Runnable>(signalFunction: (NSTimeInterval -> T), timeInterval: Double = defaultSamplingFrequency, pointProcessClosure: (T) -> Void) {
     setupStartState()
     self.timeInterval = timeInterval
     let timestamp = startDate.timeIntervalSinceNow
@@ -91,7 +77,7 @@ public final class Runner {
   
   // MARK: Run using function
   
-  private func firePoint(pointToFire: Point, signalFunction: (NSTimeInterval -> Point), pointProcessClosure: (Point) -> Void) {
+  private func firePoint<T: Runnable>(pointToFire: T, signalFunction: (NSTimeInterval -> T), pointProcessClosure: (T) -> Void) {
     if !shouldExecutePoints {
       runningStopped()
       return
