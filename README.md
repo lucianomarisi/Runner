@@ -1,11 +1,20 @@
 # Runner
 
 [![Build Status](https://travis-ci.org/lucianomarisi/Runner.svg?branch=master)](https://travis-ci.org/lucianomarisi/Runner)
+[![](https://img.shields.io/cocoapods/v/Runner.svg)](https://cocoapods.org/pods/Runner)
 [![codecov.io](http://codecov.io/github/lucianomarisi/Runner/coverage.svg?branch=master)](http://codecov.io/github/lucianomarisi/Runner?branch=master)
 
 Easily execute a block at specific time intervals.
 
 ## Installation
+
+Either
+
+- Use [CocoaPods](http://cocoapods.org):
+
+	`pod 'Runner'`
+
+OR
 
 - Add the files inside the `Runner` folder to your project
 
