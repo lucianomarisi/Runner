@@ -11,7 +11,7 @@ import Runner
 
 extension CMDeviceMotion : Motionable {}
 
-typealias DeviceMotionHandler = (Motionable, NSError?) -> Void
+typealias MotionableHandler = (Motionable, NSError?) -> Void
 
 private let defaultDeviceMotionUpdateInterval = 0.01
 
@@ -42,7 +42,7 @@ class DeviceMotionWrapper {
   
   private let runner = Runner()
   
-  func startDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(mockPoints: [PointType]? = nil, timeInterval: Double = defaultDeviceMotionUpdateInterval, handler: DeviceMotionHandler) {
+  func startDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(mockPoints: [PointType]? = nil, timeInterval: Double = defaultDeviceMotionUpdateInterval, handler: MotionableHandler) {
     
     #if (arch(i386) || arch(x86_64)) && os(iOS)
       if let mockPoints = mockPoints {
@@ -56,7 +56,7 @@ class DeviceMotionWrapper {
     
   }
   
-  func startDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(signalFunction: (NSTimeInterval -> PointType)? = nil, timeInterval: Double = defaultDeviceMotionUpdateInterval, handler: DeviceMotionHandler) {
+  func startDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(signalFunction: (NSTimeInterval -> PointType)? = nil, timeInterval: Double = defaultDeviceMotionUpdateInterval, handler: MotionableHandler) {
     
     #if (arch(i386) || arch(x86_64)) && os(iOS)
       if let signalFunction = signalFunction {
@@ -70,7 +70,7 @@ class DeviceMotionWrapper {
     
   }
   
-  private func startMockedDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(mockPoints: [PointType], handler: DeviceMotionHandler) {
+  private func startMockedDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(mockPoints: [PointType], handler: MotionableHandler) {
     
     runner.startWithMockPoints(mockPoints) { (mockPoint) -> Void in
       handler(mockPoint, nil)
@@ -78,7 +78,7 @@ class DeviceMotionWrapper {
     
   }
   
-  private func startMockedDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(signalFunction: (NSTimeInterval -> PointType),  timeInterval: Double = defaultDeviceMotionUpdateInterval, handler: DeviceMotionHandler) {
+  private func startMockedDeviceMotionUpdates<PointType : protocol<Runnable, Motionable>>(signalFunction: (NSTimeInterval -> PointType),  timeInterval: Double = defaultDeviceMotionUpdateInterval, handler: MotionableHandler) {
     
     runner.startWithFunction(signalFunction, timeInterval: timeInterval) { (mockPoint) -> Void in
       handler(mockPoint, nil)
@@ -86,7 +86,7 @@ class DeviceMotionWrapper {
     
   }
   
-  private func startRealDeviceMotionUpdates(handler: DeviceMotionHandler) {
+  private func startRealDeviceMotionUpdates(handler: MotionableHandler) {
     motionManager.startDeviceMotionUpdatesToQueue(queue) {(deviceMotion, error) -> Void in
       
       guard let deviceMotion = deviceMotion else {
